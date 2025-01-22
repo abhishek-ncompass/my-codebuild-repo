@@ -4,7 +4,7 @@ extract_required_vars() {
 }
 
 check_env_vars() {
-    SCRIPT_FILES=("scripts/deploy.sh")
+    SCRIPT_FILES=("scripts/deploy.sh scripts/deploy2.sh")
 
     REQUIRED_VARS=()
 
