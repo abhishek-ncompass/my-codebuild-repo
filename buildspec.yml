@@ -5,7 +5,6 @@ phases:
     runtime-versions:
       nodejs: 16
     commands:
-      # Install dependencies (if any)
       - echo Installing dependencies...
       - cd lambda
       - npm install || echo "No dependencies to install"
@@ -13,16 +12,27 @@ phases:
   pre_build:
     commands:
       - echo Pre-build phase...
+      
+      # List the contents of the current directory to verify where you are
       - echo "Listing the files in the current directory for debugging..."
-      - ls -a  # List contents of the current directory to verify script location
-      - echo "Listing the contents of the 'scripts' directory..."
+      - ls -al  # This will list all files in the current directory
+      
+      # If scripts folder exists, list its contents
+      - echo "Checking if 'scripts' folder exists"
+      - ls -al ./scripts  # This will list contents in 'scripts' folder if it exists
+
+      # Check if the file is present, and then make it executable
+      - echo "Trying to chmod the script"
       - sudo chmod +x ./scripts/check_env_vars.sh  # Ensure the script is executable (update path)
+      
+      # Call the script to check for required environment variables
+      - echo "Running check_env_vars.sh"
       - . ./scripts/check_env_vars.sh  # Source the script to check for required environment variables
   
   build:
     commands:
       - echo Build phase...
-      - chmod +x ./scripts/deploy.sh  # Ensure the deploy script is executable
+      - sudo chmod +x ./scripts/deploy.sh  # Ensure the deploy script is executable
       - . ./scripts/deploy.sh  # Source the deploy script
       - zip -r ../lambda.zip .  # Optionally zip the lambda code
   

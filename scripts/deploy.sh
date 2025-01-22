@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Echo the CodeBuild version and resolved version (for debugging)
 echo "CodeBuild Source Version: $CODEBUILD_SOURCE_VERSION"
 echo "CodeBuild Resolved Source Version: $CODEBUILD_RESOLVED_SOURCE_VERSION"

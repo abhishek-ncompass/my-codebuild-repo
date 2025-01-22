@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Function to check for missing environment variables
 check_env_vars() {
   # List of required variables
