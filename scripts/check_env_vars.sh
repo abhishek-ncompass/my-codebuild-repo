@@ -30,11 +30,14 @@
 # ---------------------------------------------------------------------------------
 
 
-# Function to check for missing environment variables
+#!/bin/bash
+
+# Function to extract required variables from script files
 extract_required_vars() {
     local script_file="$1"
     # Use grep to find lines with variable usage and extract variable names
-    grep -oP '\$\{?\w+\}?' "$script_file" | sort -u
+    # Strip out $ and {} to get the actual variable name
+    grep -oP '\$\{?\w+\}?' "$script_file" | sed 's/[${}]//g' | sort -u
 }
 
 # Function to check for missing environment variables
@@ -69,7 +72,7 @@ check_env_vars() {
     EXCLUDED_VARS=("LAYER_ARN" "SCHEMA_SYNC_LAYER_ARN" "LAYER_COMMON_ARN" "LAYER_CHROME_ARN" "LAYER_CUSTOM_ARN" "LAYER_SCHEMA_ARN" "LAYER_SHARP_ARN" "CODEBUILD_SOURCE_VERSION" "CODEBUILD_RESOLVED_SOURCE_VERSION")
 
     # Get the list of available environment variables
-    AVAILABLE_VARS=$(printenv)
+    AVAILABLE_VARS=$(printenv | awk -F= '{print $1}')
 
     # Debugging: Echo the available environment variables in CodeBuild
     echo "Available Environment Variables in CodeBuild:"
@@ -92,7 +95,7 @@ check_env_vars() {
         fi
 
         # Check if the environment variable is set or missing
-        if ! echo "$AVAILABLE_VARS" | grep -q "^$VAR="; then
+        if ! echo "$AVAILABLE_VARS" | grep -q "^$VAR$"; then
             echo "Error: Environment variable '$VAR' is missing."
             MISSING_VARS+=("$VAR")
         else
