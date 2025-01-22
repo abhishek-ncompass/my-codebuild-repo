@@ -13,14 +13,14 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: lambda/
-      FunctionName: abhishek-codebuild-${VAR1}
+      FunctionName: abhishek-codebuild-\${VAR1}
       Handler: index.handler
       Runtime: nodejs16.x
       Environment:
         Variables:
-          VAR1: ${VAR1}
-          VAR2: ${VAR2}
-          VAR3: ${VAR3}
+          VAR1: "\${VAR1}"
+          VAR2: "\${VAR2}"
+          VAR3: "\${VAR3}"
 EOM
 
 # Deploy using AWS CloudFormation
