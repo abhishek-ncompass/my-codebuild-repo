@@ -75,9 +75,9 @@ check_env_vars() {
     AVAILABLE_VARS=$(printenv | awk -F= '{print $1}')
 
     # Debugging: Echo the available environment variables in CodeBuild
-    echo "Available Environment Variables in CodeBuild:"
-    echo "$AVAILABLE_VARS"
-    echo "----------------------------"
+    # echo "Available Environment Variables in CodeBuild:"
+    # echo "$AVAILABLE_VARS"
+    # echo "----------------------------"
 
     # Echo the required variables
     echo "Required Variables (from scripts):"
@@ -90,7 +90,7 @@ check_env_vars() {
     for VAR in "${REQUIRED_VARS[@]}"; do
         # Skip excluded variables
         if [[ " ${EXCLUDED_VARS[@]} " =~ " ${VAR} " ]]; then
-            echo "Skipping check for excluded variable '$VAR'."
+            # echo "Skipping check for excluded variable '$VAR'."
             continue
         fi
 
