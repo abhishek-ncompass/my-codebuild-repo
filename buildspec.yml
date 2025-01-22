@@ -13,13 +13,13 @@ phases:
   pre_build:
     commands:
       - echo Pre-build phase...
-      - sudo chmod +x scripts/check_env_vars.sh  # Ensure the script is executable
+      # - sudo chmod +x scripts/check_env_vars.sh  # Ensure the script is executable
       - . scripts/check_env_vars.sh  # Call the script to check for required environment variables
   
   build:
     commands:
       - echo Build phase...
-      - sudo chmod +x scripts/deploy.sh  # Ensure the deploy script is executable
+      # - sudo chmod +x scripts/deploy.sh  # Ensure the deploy script is executable
       - . scripts/deploy.sh  # Call the deploy script
       - zip -r ../lambda.zip .  # Optionally zip the lambda code
   
