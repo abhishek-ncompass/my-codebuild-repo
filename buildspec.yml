@@ -28,6 +28,9 @@ phases:
       - echo "Running check_env_vars.sh for deploy.sh"
       - . ./scripts/check_env_vars.sh ./scripts/deploy.sh  # Pass the deploy.sh script name
 
+      - echo "Running check_env_vars.sh for deploy2.sh"
+      - . ./scripts/check_env_vars.sh ./scripts/deploy2.sh  # Pass the deploy.sh script name
+
   build:
     commands:
       - echo Build phase...
