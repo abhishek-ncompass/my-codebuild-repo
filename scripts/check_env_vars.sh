@@ -29,11 +29,11 @@ check_env_vars() {
 
     AVAILABLE_VARS=$(printenv | awk -F= '{print $1}')
 
-    echo "Required Variables (from scripts):"
-    for VAR in "${REQUIRED_VARS[@]}"; do
-        echo "$VAR"
-    done
-    echo "----------------------------"
+    # echo "Required Variables (from scripts):"
+    # for VAR in "${REQUIRED_VARS[@]}"; do
+    #     echo "$VAR"
+    # done
+    # echo "----------------------------"
 
     for VAR in "${REQUIRED_VARS[@]}"; do
         if [[ " ${EXCLUDED_VARS[@]} " =~ " ${VAR} " ]]; then
