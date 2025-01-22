@@ -87,7 +87,6 @@ done
     echo "Build failed due to missing environment variables."
     exit 1  # Exit with a non-zero status to fail the build
   fi
-  done
 
   # If there are any missing variables, log them and exit with an error
   if [ ${#MISSING_VARS[@]} -gt 0 ]; then
