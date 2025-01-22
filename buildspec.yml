@@ -1,0 +1,41 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    commands:
+      # Installing dependencies
+      echo Installing dependencies...
+      cd lambda
+      npm install
+
+  pre_build:
+    commands:
+      # Create an IAM Role for Lambda (optional)
+      echo Pre Build Phase
+
+  build:
+    commands:
+      echo Building the Lambda function...
+
+  post_build:
+    commands:
+      # Zip the Lambda function code
+      echo Zipping Lambda function code...
+      cd lambda
+      zip -r ../lambda.zip .
+
+artifacts:
+  files:
+    - lambda.zip
+
+cache:
+  paths:
+    - node_modules/**/*
+
+environment_variables:
+  value:
+    VAR1: "Value for VAR1"
+    VAR2: "Value for VAR2"
+    VAR3: "Value for VAR3"

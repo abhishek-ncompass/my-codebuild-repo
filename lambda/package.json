@@ -1,0 +1,14 @@
+{
+    "name": "my-lambda",
+    "version": "1.0.0",
+    "description": "Lambda function to print environment variables",
+    "main": "index.js",
+    "dependencies": {},
+    "devDependencies": {},
+    "scripts": {
+      "start": "node index.js"
+    },
+    "author": "",
+    "license": "ISC"
+  }
+  
