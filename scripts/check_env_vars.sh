@@ -1,7 +1,7 @@
 # Function to check for missing environment variables
 check_env_vars() {
   # List of required variables
-  REQUIRED_VARS=("VAR1" "VAR2" "VAR3")
+  REQUIRED_VARS=("VAR1" "VAR2" "VAR4")
 
   # Initialize a variable to keep track of missing environment variables
   MISSING_VARS=()
