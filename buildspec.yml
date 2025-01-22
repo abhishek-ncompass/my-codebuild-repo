@@ -24,7 +24,7 @@ phases:
         extract_required_vars() {
           local script_file="$1"
           # Use grep to find lines with variable usage and extract variable names
-          grep -oP '\$\{?\w+\}?' "$script_file" | sort -u
+          grep -oP '\$\{(\w+)\}' "$script_file" | sed 's/^\${//;s/}$//' | sort -u
         }
 
         # List of script files to check
