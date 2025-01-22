@@ -124,11 +124,12 @@ check_env_vars() {
             echo "Warning: Script file '$script' not found."
           fi
         done
-        
-  EXCLUDED_VARS=("LAYER_ARN" "SCHEMA_SYNC_LAYER_ARN" "LAYER_COMMON_ARN" "LAYER_CHROME_ARN" "LAYER_CUSTOM_ARN" "LAYER_SCHEMA_ARN" "LAYER_SHARP_ARN" "CODEBUILD_SOURCE_VERSION" "CODEBUILD_RESOLVED_SOURCE_VERSION")
 
-  # Initialize a variable to keep track of missing environment variables
+  EXCLUDED_VARS=("LAYER_ARN" "SCHEMA_SYNC_LAYER_ARN" "LAYER_COMMON_ARN" "LAYER_CHROME_ARN" "LAYER_CUSTOM_ARN" "LAYER_SCHEMA_ARN" "LAYER_SHARP_ARN" "CODEBUILD_SOURCE_VERSION" "CODEBUILD_RESOLVED_SOURCE_VERSION")
   MISSING_VARS=()
+  AVAILABLE_VARS=$(printenv | awk -F= '{print $1}')
+
+  echo $AVAILABLE_VARS
 
   # Check if each required variable is set
   for VAR in "${REQUIRED_VARS[@]}"; do
@@ -140,11 +141,27 @@ check_env_vars() {
     fi
   done
 
+# Check for each required variable
+    for VAR in "${REQUIRED_VARS[@]}"; do
+        # Skip excluded variables
+        if [[ " ${EXCLUDED_VARS[@]} " =~ " ${VAR} " ]]; then
+            echo "Skipping check for excluded variable '$VAR'."
+            continue
+        fi
 
-  # If there are any missing variables, log them and exit with an error
-  if [ ${#MISSING_VARS[@]} -gt 0 ]; then
-    echo "The following required environment variables are missing: ${MISSING_VARS[@]}"
-    echo "Build failed due to missing environment variables."
-    exit 1  # Exit with a non-zero status to fail the build
-  fi
+        # Check if the environment variable is set or missing
+        if ! echo "$AVAILABLE_VARS" | grep -q "^$VAR$"; then
+            echo "Error: Environment variable '$VAR' is missing."
+            MISSING_VARS+=("$VAR")
+        else
+            echo "Environment variable '$VAR' is set."
+        fi
+    done
+
+    # If there are any missing variables, log them and exit with an error
+    if [ ${#MISSING_VARS[@]} -gt 0 ]; then
+        echo "The following required environment variables are missing: ${MISSING_VARS[@]}"
+        echo "Build failed due to missing environment variables."
+        exit 1  # Exit with a non-zero status to fail the build
+    fi
 }
