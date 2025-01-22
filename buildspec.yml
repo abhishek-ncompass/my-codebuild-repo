@@ -14,7 +14,7 @@ phases:
     commands:
       - echo Pre-build phase...
       - echo "Listing the files in the current directory for debugging..."
-      - ls -l  # List contents of the current directory to verify script location
+      - ls -a  # List contents of the current directory to verify script location
       - echo "Listing the contents of the 'scripts' directory..."
       - ls -l ./scripts  # List contents of the 'scripts' folder (if it's in a subdirectory)
       - chmod +x ./scripts/check_env_vars.sh  # Ensure the script is executable (update path)
