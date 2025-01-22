@@ -13,12 +13,12 @@ phases:
   pre_build:
     commands:
       echo Pre-build phase...
+      chmod +x ./check_env_vars.sh 
+      ./check_env_vars.sh  
   
   build:
     commands:
       echo Build phase...
-      chmod +x ./check_env_vars.sh 
-      ./check_env_vars.sh  
       chmod +x ../deploy.sh  
       ./deploy.sh  
       zip -r ../lambda.zip .  
