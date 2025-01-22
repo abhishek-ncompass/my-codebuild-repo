@@ -1,6 +1,6 @@
 # Echo the CodeBuild version and resolved version (for debugging)
-echo "CodeBuild Source Version: $CODEBUILD_SOURCE_VERSION"
-echo "CodeBuild Resolved Source Version: $CODEBUILD_RESOLVED_SOURCE_VERSION"
+# echo "CodeBuild Source Version: $CODEBUILD_SOURCE_VERSION"
+# echo "CodeBuild Resolved Source Version: $CODEBUILD_RESOLVED_SOURCE_VERSION"
 
 # Create CloudFormation template.yaml with environment variables
 cat > template.yaml <<EOM

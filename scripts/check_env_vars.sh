@@ -41,7 +41,7 @@ extract_required_vars() {
 # Function to check for missing environment variables
 check_env_vars() {
   # List of script files to check for environment variables
-  SCRIPT_FILES=("scripts/deploy.sh" "scripts/monitoring-deploy.sh" "scripts/deployAdminTool.sh" "scripts/deployMisc.sh" "scripts/deployOnboarding.sh")
+  SCRIPT_FILES=("scripts/deploy.sh")
 
   # Initialize an array to hold all required variables
   REQUIRED_VARS=()
