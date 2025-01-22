@@ -30,6 +30,8 @@
 
 #!/bin/bash
 
+#!/bin/bash
+
 # Function to extract required variables from script files
 extract_required_vars() {
     local script_file="$1"
@@ -59,7 +61,7 @@ check_env_vars() {
     # Initialize an array to track missing environment variables
     MISSING_VARS=()
 
-    # List of excluded variables
+    # List of excluded variables (do not check these)
     EXCLUDED_VARS=("LAYER_ARN" "SCHEMA_SYNC_LAYER_ARN" "LAYER_COMMON_ARN" "LAYER_CHROME_ARN" "LAYER_CUSTOM_ARN" "LAYER_SCHEMA_ARN" "LAYER_SHARP_ARN" "CODEBUILD_SOURCE_VERSION" "CODEBUILD_RESOLVED_SOURCE_VERSION")
 
     # Get the list of available environment variables
