@@ -15,6 +15,7 @@ phases:
       
       # List the contents of the current directory to verify where you are
       - echo "Listing the files in the current directory for debugging..."
+      - cd ..
       - ls -al  # This will list all files in the current directory
       
       # If scripts folder exists, list its contents
