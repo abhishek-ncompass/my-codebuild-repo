@@ -23,14 +23,6 @@ Resources:
           VAR3: $VAR3
 EOM
 
-# Print the template.yaml for debugging
-echo "Generated CloudFormation template:"
-cat template.yaml
-
-# Validate the CloudFormation template using AWS CLI
-echo "Validating CloudFormation template..."
-aws cloudformation validate-template --template-body file://template.yaml
-
 # Deploy using AWS CloudFormation
 echo "Deploying CloudFormation stack..."
 aws cloudformation deploy \

@@ -17,9 +17,11 @@ phases:
   build:
     commands:
       echo Build phase...
-      chmod +x ../deploy.sh
-      ./deploy.sh
-      zip -r ../lambda.zip .
+      chmod +x ./check_env_vars.sh 
+      ./check_env_vars.sh  
+      chmod +x ../deploy.sh  
+      ./deploy.sh  
+      zip -r ../lambda.zip .  
   
 artifacts:
   files:
