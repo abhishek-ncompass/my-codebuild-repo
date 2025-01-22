@@ -21,12 +21,12 @@ Resources:
           VAR3: $VAR3
 EOM
 
-# Deploy using AWS CloudFormation
-echo "Deploying CloudFormation stack..."
-aws cloudformation deploy \
-  --template-file template.yaml \
-  --stack-name abhishek-codebuild-${VAR1} \
-  --capabilities CAPABILITY_IAM
+# # Deploy using AWS CloudFormation
+# echo "Deploying CloudFormation stack..."
+# aws cloudformation deploy \
+#   --template-file template.yaml \
+#   --stack-name abhishek-codebuild-${VAR1} \
+#   --capabilities CAPABILITY_IAM
 
-# Optional: Check the stack status
-aws cloudformation describe-stacks --stack-name abhishek-codebuild-${VAR1}
+# # Optional: Check the stack status
+# aws cloudformation describe-stacks --stack-name abhishek-codebuild-${VAR1}
