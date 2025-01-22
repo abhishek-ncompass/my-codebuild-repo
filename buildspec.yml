@@ -15,7 +15,6 @@ phases:
       echo Pre-build phase...
       # chmod +x ./check_env_vars.sh 
       # ./check_env_vars.sh  
-
       check_env_vars() {
       # List of required variables
       REQUIRED_VARS=("VAR1" "VAR2" "VAR3")
