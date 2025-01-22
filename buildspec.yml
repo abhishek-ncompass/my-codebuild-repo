@@ -5,37 +5,32 @@ phases:
     runtime-versions:
       nodejs: 16
     commands:
-      # Installing dependencies
+      # Install dependencies (if any)
       echo Installing dependencies...
       cd lambda
-      npm install
-
+      npm install || echo "No dependencies to install"
+  
   pre_build:
     commands:
-      # Create an IAM Role for Lambda (optional)
-      echo Pre Build Phase
-
+      echo Pre-build phase...
+  
   build:
     commands:
-      echo Building the Lambda function...
-
+      echo Build phase...
+      # Create a package for Lambda (optional if you want to zip the function code)
+      zip -r ../lambda.zip .
+  
   post_build:
     commands:
-      # Zip the Lambda function code
-      echo Zipping Lambda function code...
-      cd lambda
-      zip -r ../lambda.zip .
+      echo Post-build phase...
+      # Make the deploy.sh script executable and deploy the Lambda function
+      chmod +x ../deploy.sh
+      ./deploy.sh
 
 artifacts:
   files:
-    - lambda.zip
-
+    - lambda.zip  # This will be the artifact if needed for Lambda function update (optional)
+  
 cache:
   paths:
-    - node_modules/**/*
-
-environment_variables:
-  value:
-    VAR1: "Value for VAR1"
-    VAR2: "Value for VAR2"
-    VAR3: "Value for VAR3"
+    - node_modules/**/*  # Cache node modules to speed up future builds
