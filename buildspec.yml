@@ -17,16 +17,10 @@ phases:
   build:
     commands:
       echo Build phase...
-      # Create a package for Lambda (optional if you want to zip the function code)
-      zip -r ../lambda.zip .
-  
-  post_build:
-    commands:
-      echo Post-build phase...
-      # Make the deploy.sh script executable and deploy the Lambda function
       chmod +x ../deploy.sh
       ./deploy.sh
-
+      zip -r ../lambda.zip .
+  
 artifacts:
   files:
     - lambda.zip  # This will be the artifact if needed for Lambda function update (optional)
