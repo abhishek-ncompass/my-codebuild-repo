@@ -6,22 +6,22 @@ phases:
       nodejs: 16
     commands:
       # Install dependencies (if any)
-      echo Installing dependencies...
-      cd lambda
-      npm install || echo "No dependencies to install"
+      - echo Installing dependencies...
+      - cd lambda
+      - npm install || echo "No dependencies to install"
   
   pre_build:
     commands:
-      echo Pre-build phase...
-      chmod +x ./check_env_vars.sh 
-      . check_env_vars.sh  
+      - echo Pre-build phase...
+      - chmod +x ./check_env_vars.sh 
+      - . check_env_vars.sh  
   
   build:
     commands:
-      echo Build phase...
-      chmod +x ../deploy.sh  
-      . deploy.sh  
-      zip -r ../lambda.zip .  
+      - echo Build phase...
+      - chmod +x ../deploy.sh  
+      - . deploy.sh  
+      - zip -r ../lambda.zip .  
   
 artifacts:
   files:
