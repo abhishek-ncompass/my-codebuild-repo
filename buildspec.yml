@@ -13,14 +13,18 @@ phases:
   pre_build:
     commands:
       - echo Pre-build phase...
-      - sudo chmod 777 ./check_env_vars.sh  # Ensure the script is executable
-      - . check_env_vars.sh  # Call the script to check for required environment variables
+      - echo "Listing the files in the current directory for debugging..."
+      - ls -l  # List contents of the current directory to verify script location
+      - echo "Listing the contents of the 'scripts' directory..."
+      - ls -l ./scripts  # List contents of the 'scripts' folder (if it's in a subdirectory)
+      - chmod +x ./scripts/check_env_vars.sh  # Ensure the script is executable (update path)
+      - . ./scripts/check_env_vars.sh  # Source the script to check for required environment variables
   
   build:
     commands:
       - echo Build phase...
-      - sudo chmod 777 ./deploy.sh  # Ensure the deploy script is executable
-      - . deploy.sh  # Call the deploy script
+      - chmod +x ./scripts/deploy.sh  # Ensure the deploy script is executable
+      - . ./scripts/deploy.sh  # Source the deploy script
       - zip -r ../lambda.zip .  # Optionally zip the lambda code
   
 artifacts:
