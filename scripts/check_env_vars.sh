@@ -65,19 +65,28 @@ check_env_vars() {
 
   # Check for each required variable
   for VAR in "${REQUIRED_VARS[@]}"; do
-    # Skip excluded variables
-    if [[ " ${EXCLUDED_VARS[@]} " =~ " ${VAR} " ]]; then
-      echo "Skipping check for excluded variable '$VAR'."
-      continue
-    fi
+  # Skip excluded variables
+  if [[ " ${EXCLUDED_VARS[@]} " =~ " ${VAR} " ]]; then
+    echo "Skipping check for excluded variable '$VAR'."
+    continue
+  fi
+
+  # Check if the environment variable is set or missing
+  if [ -z "${!VAR}" ]; then
+    echo "Error: Environment variable '$VAR' is missing."
+    MISSING_VARS+=("$VAR")
+  else
+    echo "Environment variable '$VAR' is set to: ${!VAR}"
+  fi
+done
+
 
     # Check if the variable is in the available environment variables
-    if ! echo "$AVAILABLE_VARS" | grep -q "^$VAR$"; then
-      echo "Error: Required environment variable '$VAR' is not set."
-      MISSING_VARS+=("$VAR")
-    else
-      echo "Environment variable '$VAR' is set to: ${!VAR}"
-    fi
+    if [ ${#MISSING_VARS[@]} -gt 0 ]; then
+    echo "The following required environment variables are missing: ${MISSING_VARS[@]}"
+    echo "Build failed due to missing environment variables."
+    exit 1  # Exit with a non-zero status to fail the build
+  fi
   done
 
   # If there are any missing variables, log them and exit with an error
