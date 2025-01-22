@@ -32,11 +32,10 @@
 
 # Function to extract required variables from script files
 extract_required_vars() {
-  local script_file="$1"
-  # Use grep to find lines with variable usage and extract variable names
-  # This will match both ${VAR} and $VAR formats
-  grep -oP '\$\{?\w+\}?' "$script_file" | sort -u
-}
+          local script_file="$1"
+          # Use grep to find lines with variable usage and extract variable names
+          grep -oP '\$\{?\w+\}?' "$script_file" | sort -u
+        }
 
 # Function to check for missing environment variables
 check_env_vars() {
@@ -59,6 +58,8 @@ check_env_vars() {
 
   # Initialize an array to track missing environment variables
   MISSING_VARS=()
+
+  EXCLUDED_VARS=("LAYER_ARN" "SCHEMA_SYNC_LAYER_ARN" "LAYER_COMMON_ARN" "LAYER_CHROME_ARN" "LAYER_CUSTOM_ARN" "LAYER_SCHEMA_ARN" "LAYER_SHARP_ARN" "CODEBUILD_SOURCE_VERSION" "CODEBUILD_RESOLVED_SOURCE_VERSION")
 
   # Get the list of available environment variables
   AVAILABLE_VARS=$(printenv | awk -F= '{print $1}')
