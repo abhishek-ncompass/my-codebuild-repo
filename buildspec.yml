@@ -18,6 +18,55 @@ phases:
     commands:
       echo Build phase...
       chmod +x ../deploy.sh
+
+       - |
+        # Function to extract required variables from script files
+        extract_required_vars() {
+          local script_file="$1"
+          # Use grep to find lines with variable usage and extract variable names
+          grep -oP '\$\{?\w+\}?' "$script_file" | sort -u
+        }
+
+        # List of script files to check
+        SCRIPT_FILES=("./deploy.sh")
+
+        # Set to hold all required variables
+        REQUIRED_VARS=()
+
+        # Extract required variables from each script file
+        for script in "${SCRIPT_FILES[@]}"; do
+          if [ -f "$script" ]; then
+            while IFS= read -r var; do
+              REQUIRED_VARS+=("$var")
+            done < <(extract_required_vars "$script")
+          else
+            echo "Warning: Script file '$script' not found."
+          fi
+        done
+
+        # List of variables to exclude from the check
+        EXCLUDED_VARS=("LAYER_ARN" "SCHEMA_SYNC_LAYER_ARN" "LAYER_COMMON_ARN" "LAYER_CHROME_ARN" "LAYER_CUSTOM_ARN" "LAYER_SCHEMA_ARN" "LAYER_SHARP_ARN" "CODEBUILD_SOURCE_VERSION" "CODEBUILD_RESOLVED_SOURCE_VERSION")
+
+        # Get the list of available environment variables
+        AVAILABLE_VARS=$(printenv | awk -F= '{print $1}')
+
+        # Check for each required variable
+        for VAR in "${REQUIRED_VARS[@]}"; do
+          # Skip excluded variables
+          if [[ " ${EXCLUDED_VARS[@]} " =~ " ${VAR} " ]]; then
+            echo "Skipping check for excluded variable '$VAR'."
+            continue
+          fi
+
+          # Check if the variable is in the available environment variables
+          if ! echo "$AVAILABLE_VARS" | grep -q "^$VAR$"; then
+            echo "Error: Required environment variable '$VAR' is not set."
+            exit 1  # Exit with a non-zero status to fail the build
+          fi
+        done
+
+
+
       ./deploy.sh
       zip -r ../lambda.zip .
   
