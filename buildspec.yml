@@ -16,8 +16,7 @@ phases:
       - echo "Listing the files in the current directory for debugging..."
       - ls -a  # List contents of the current directory to verify script location
       - echo "Listing the contents of the 'scripts' directory..."
-      - ls -a ./scripts  # List contents of the 'scripts' folder (if it's in a subdirectory)
-      - chmod +x ./scripts/check_env_vars.sh  # Ensure the script is executable (update path)
+      - sudo chmod +x ./scripts/check_env_vars.sh  # Ensure the script is executable (update path)
       - . ./scripts/check_env_vars.sh  # Source the script to check for required environment variables
   
   build:
