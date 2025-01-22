@@ -13,7 +13,6 @@ phases:
   pre_build:
     commands:
       - echo Pre-build phase...
-      - ls -l scripts/  # List the files in the scripts directory to verify the file exists
       - chmod +x scripts/check_env_vars.sh  # Ensure the script is executable
       - . scripts/check_env_vars.sh  # Call the script to check for required environment variables
   
