@@ -41,10 +41,10 @@ check_env_vars() {
         fi
 
         if ! echo "$AVAILABLE_VARS" | grep -q "^$VAR$"; then
-            echo "Error: Environment variable '$VAR' is missing."
+            # echo "Error: Environment variable '$VAR' is missing."
             MISSING_VARS+=("$VAR")
-        else
-            echo "Environment variable '$VAR' is set."
+        # else
+        #     echo "Environment variable '$VAR' is set."
         fi
     done
 
