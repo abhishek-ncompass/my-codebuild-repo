@@ -1,6 +1,6 @@
 // lambda/index.js
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
     const var1 = process.env.VAR1;
     const var2 = process.env.VAR2;
     const var3 = process.env.VAR3;

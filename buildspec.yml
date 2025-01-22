@@ -34,7 +34,3 @@ artifacts:
 cache:
   paths:
     - node_modules/**/*  # Cache node modules to speed up future builds
-
-    VAR1: "Value for VAR1"
-    VAR2: "Value for VAR2"
-    VAR3: "Value for VAR3"
