@@ -1,3 +1,11 @@
+# Zip the Lambda code
+echo "Zipping Lambda code..."
+zip -r lambda.zip ./lambda
+
+
+echo "Uploading Lambda code to S3..."
+aws s3 cp lambda.zip s3://abhishek-s3-02/abhishek-practice/lambda.zip
+
 echo "CodeBuild Source Version: $CODEBUILD_SOURCE_VERSION"
 echo "CodeBuild Resolved Source Version: $CODEBUILD_RESOLVED_SOURCE_VERSION"
 
@@ -8,7 +16,7 @@ Resources:
   abhishekLambdaCodebuild:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambda/
+      CodeUri: s3://abhishek-s3-02/abhishek-practice/lambda.zip
       FunctionName: abhishek-codebuild-$VAR1
       Handler: index.handler
       Runtime: nodejs16.x
