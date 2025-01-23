@@ -13,34 +13,30 @@ phases:
     commands:
       - echo Pre-build phase...
       
-      # List the contents of the current directory to verify where you are
       - echo "Listing the files in the current directory for debugging..."
       - cd ..
-      - ls -al  # This will list all files in the current directory
+      - ls -al  
       
-      # If scripts folder exists, list its contents
       - echo "Checking if 'scripts' folder exists"
-      - ls -al ./scripts  # This will list contents in 'scripts' folder if it exists
+      - ls -al ./scripts 
 
-      # Check if the file is present, and then make it executable
       - echo "Trying to chmod the script"
-      - sudo chmod +x ./scripts/check_env_vars.sh  # Ensure the script is executable (update path)
+      - sudo chmod +x ./scripts/check_env_vars.sh 
       
-      # Call the script to check for required environment variables
       - echo "Running check_env_vars.sh"
-      - . ./scripts/check_env_vars.sh  # Source the script to check for required environment variables
+      - . ./scripts/check_env_vars.sh 
   
   build:
     commands:
       - echo Build phase...
-      - sudo chmod +x ./scripts/deploy.sh  # Ensure the deploy script is executable
-      - . ./scripts/deploy.sh  # Source the deploy script
-      - zip -r lambda.zip .  # Create lambda.zip in the current directory
+      - sudo chmod +x ./scripts/deploy.sh  
+      - . ./scripts/deploy.sh  
+      - zip -r lambda.zip .  
 
 artifacts:
   files:
-    - lambda.zip  # Ensure the file name matches the one created during the build phase
-
+    - lambda.zip
+    - template.yaml
 cache:
   paths:
-    - node_modules/**/*  # Cache node modules to speed up future builds
+    - node_modules/**/*  
