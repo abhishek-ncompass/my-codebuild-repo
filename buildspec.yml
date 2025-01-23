@@ -35,12 +35,12 @@ phases:
       - echo Build phase...
       - sudo chmod +x ./scripts/deploy.sh  # Ensure the deploy script is executable
       - . ./scripts/deploy.sh  # Source the deploy script
-      - zip -r ../lambda.zip .  # Optionally zip the lambda code
-  
+       - zip -r lambda.zip .  # Create lambda.zip in the current directory
+
 artifacts:
   files:
-    - lambda.zip  # This will be the artifact if needed for Lambda function update (optional)
-  
+    - lambda.zip  # Ensure the file name matches the one created during the build phase
+
 cache:
   paths:
     - node_modules/**/*  # Cache node modules to speed up future builds
