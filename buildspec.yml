@@ -35,7 +35,7 @@ phases:
       - echo Build phase...
       - sudo chmod +x ./scripts/deploy.sh  # Ensure the deploy script is executable
       - . ./scripts/deploy.sh  # Source the deploy script
-       - zip -r lambda.zip .  # Create lambda.zip in the current directory
+      - zip -r lambda.zip .  # Create lambda.zip in the current directory
 
 artifacts:
   files:
