@@ -21,3 +21,10 @@ Resources:
 EOM
 
 cat template.yaml
+
+echo "Deploying CloudFormation stack..."
+aws cloudformation deploy \
+  --template-file template.yaml \
+  --stack-name abhishek-codebuild-${VAR1} \
+  --capabilities CAPABILITY_IAM \
+  --capabilities CAPABILITY_AUTO_EXPAND  
