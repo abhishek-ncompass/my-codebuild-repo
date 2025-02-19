@@ -26,7 +26,7 @@ Resources:
           VAR2: $VAR2
           VAR4: $VAR4
           VAR3: $VAR3
-          WESELL_ENV: $VAR5
+          WESELL_ENV: $VAR3
 EOM
 
 cat template.yaml
