@@ -5,7 +5,8 @@ extract_required_vars() {
 
 check_env_vars() {
     # SCRIPT_FILES=("scripts/deploy.sh" "scripts/deploy2.sh")
-    SCRIPT_FILES=("scripts/deploy.sh")
+    # SCRIPT_FILES=("scripts/deploy.sh")
+    local SCRIPT_FILES=("$@")
 
     REQUIRED_VARS=()
 
@@ -56,4 +57,7 @@ check_env_vars() {
     fi
 }
 
-check_env_vars
+# check_env_vars
+
+check_env_vars "scripts/deploy.sh"
+check_env_vars "scripts/deploy2.sh"
